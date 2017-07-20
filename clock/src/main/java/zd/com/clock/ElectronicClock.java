@@ -55,6 +55,7 @@ public class ElectronicClock extends TextView {
         } catch (Exception e) {
             formatter = new SimpleDateFormat("HH:mm:ss");
         }
+        intent = new Intent(context, ClockService.class);
         EventBus.getDefault().register(this);
     }
 
@@ -71,13 +72,18 @@ public class ElectronicClock extends TextView {
         setText(formatter.format(event));
     }
 
+    private Intent intent = null;
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
         super.onWindowVisibilityChanged(visibility);
+        if (intent == null) {
+            intent = new Intent(context, ClockService.class);
+        }
         if (visibility == VISIBLE) {
-            Intent intent = new Intent(context, ClockService.class);
             context.stopService(intent);
             context.startService(intent);
+        } else {
+            context.stopService(intent);
         }
     }
 }

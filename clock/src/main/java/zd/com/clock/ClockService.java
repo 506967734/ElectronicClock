@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -58,6 +59,7 @@ public class ClockService extends Service {
     }
 
     private void sendEvent() {
+        Log.d("ClockService", "------------>sendEvent");
         EventBus.getDefault().post(new TimeUpdate(time));
     }
 

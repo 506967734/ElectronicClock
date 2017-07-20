@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <zd.com.clock.ElectronicClock
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnClick"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        app:textFormatStr="HH:mm:ss" />
+        android:text="电子时钟" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnTimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="定时器" />
+
+    <Button
+        android:id="@+id/btnCountDown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="倒计时" />
+
+
+</LinearLayout>
