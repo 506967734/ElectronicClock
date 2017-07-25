@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import zd.com.timer.Constants;
 import zd.com.timer.TimerService;
 
@@ -16,14 +18,17 @@ import zd.com.timer.TimerService;
  */
 public class TimerActivity extends AppCompatActivity {
     TextView tv;
+    TextView tvOther;
     private MsgReceiver receiver = null;
     private Intent intent = null;
+    private long cnt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
         tv = (TextView) findViewById(R.id.tv);
+        tvOther = (TextView) findViewById(R.id.tvOther);
         initService();
         initReceiver();
     }
@@ -58,6 +63,8 @@ public class TimerActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             str = str + "s";
             tv.setText(str);
+            cnt++;
+            tvOther.setText(getStringTime());
         }
     }
 
@@ -68,5 +75,17 @@ public class TimerActivity extends AppCompatActivity {
         //注销广播
         unregisterReceiver(receiver);
         super.onDestroy();
+    }
+
+    /**
+     * 返回显示的时间
+     *
+     * @return
+     */
+    private String getStringTime() {
+        int hour = (int) cnt / 3600;
+        int min = (int) cnt % 3600 / 60;
+        int second = (int) cnt % 60;
+        return String.format(Locale.CHINA, "%02d:%02d:%02d", hour, min, second);
     }
 }
